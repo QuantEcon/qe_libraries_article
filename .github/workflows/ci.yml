@@ -1,12 +1,6 @@
 name: paper-draft
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push]
 
 jobs:
   paper:
