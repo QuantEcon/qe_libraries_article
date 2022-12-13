@@ -1,6 +1,6 @@
 name: paper-draft
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   paper:
