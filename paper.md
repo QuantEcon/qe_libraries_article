@@ -40,8 +40,8 @@ The library also has some other submodules containing utility functions, impleme
 
 The `quantecon.markov` module deals with the computations related to the markov chains.
 
-This module contains a class `MarkovChain` that deals with finite-state discrete-time Markov chain.
-```code-cell
+This module contains a class `MarkovChain` which represents finite-state discrete-time Markov chain.
+```python
 >>> P = np.array([
 ...     [0.1, 0.9],
 ...     [0.0, 1.0]
@@ -49,26 +49,37 @@ This module contains a class `MarkovChain` that deals with finite-state discrete
 >>> mc = qe.MarkovChain(P)
 ```
 
-The `MarkovChain` object consits of many useful information like:
+The `MarkovChain` object consists of many useful information like:
+
 - List of stationary distributions
-```code-cell
+
+```python
 >>> mc.stationary_distributions
 array([[0., 1.]])
 ```
-- Indicate whether the Markov chain is irreducible
-```code-cell
+
+- Indicates whether the Markov chain is irreducible
+```python
 >>> mc.is_irreducible
 False
 ```
-- Indicate whether the Markov chain is aperiodic
-```code-cell
+
+- Indicates whether the Markov chain is aperiodic
+```python
 >>> mc.is_aperiodic
 True
 ```
+
 - List of communication classes
-```code-cell
+```python
 >>> mc.communication_classes
 [array([1]), array([0])]
+```
+
+- Simulate time series of state transitions
+```python
+>>> mc.simulate_indices(5)
+array([0, 1, 1, 1, 1])
 ```
 
 The `MarkovChain` object is also capable of computing many different features like the number of the recurrent classes, period of the Markov chain, list of cyclic classes, etc.
