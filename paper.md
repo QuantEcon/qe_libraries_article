@@ -29,6 +29,7 @@ QuantEcon is a NumFOCUS fiscally sponsored project dedicated to development and 
 # QuantEcon Capabilities
 
 This section gives a basic introduction of QuantEcon and it's usage. The `quantecon` python library consists of the following major modules:
+
 - Game Theory (`game_theory`)
 - Markov Chains (`markov`)
 - Optimization algorithms (`optimize`)
@@ -41,6 +42,7 @@ The library also has some other submodules containing utility functions, impleme
 The `quantecon.markov` module deals with the computations related to the markov chains.
 
 This module contains a class `MarkovChain` which represents finite-state discrete-time Markov chain.
+
 ```python
 >>> P = np.array([
 ...     [0.1, 0.9],
@@ -83,4 +85,31 @@ array([0, 1, 1, 1, 1])
 ```
 
 The `MarkovChain` object is also capable of computing many different features like the number of the recurrent classes, period of the Markov chain, list of cyclic classes, etc.
+
+It is also possible to construct a `MarkovChain` object using approximation:
+
+- `tauchen`: discretized version of the linear Gaussian AR(1) process using Tauchen's method.
+$$
+  y_t = \mu + \rho y_{t-1} + \epsilon_t
+$$
+
+```python
+>>> tauchen_mc = qe.markov.tauchen(n=4, rho=0.5, sigma=0.5, mu=0., n_std=3)
+>>> tauchen_mc.state_values
+array([-1.73205081, -0.57735027,  0.57735027,  1.73205081])
+```
+
+- `rouwenhorst`: estimates a stationary AR(1) process. The Rouwenhorst approximation uses the recursive defintion for approximating a distribution.
+
+
+$$
+y_t = \mu + \rho y_{t-1} + \varepsilon_t
+$$
+
+```python
+>>> rhorst_mc = qe.markov.rouwenhorst(n=4, rho=0.5, sigma=0.5, mu=0.)
+>>> rhorst_mc.state_values
+array([-1.        , -0.33333333,  0.33333333,  1.        ])
+```
+
 # References
