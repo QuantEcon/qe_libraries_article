@@ -112,4 +112,45 @@ $$
 array([-1.        , -0.33333333,  0.33333333,  1.        ])
 ```
 
+The `quantecon.markov` module can also be used for solving discrete dynamic programs (also known as Markov decision processes) with finite states and actions.
+
+The `DiscreteDP` class currently implements the following solution algorithms:
+
+- value iteration
+- policy iteration
+- modified policy iteration
+- linear programming
+
+```python
+>>> s_indices = [0, 0, 1]  # State indices
+>>> a_indices = [0, 1, 0]  # Action indices
+>>> R = [5, 10, -1]  # Rewards
+>>> Q = [(0.5, 0.5), (0, 1), (0, 1)]  # Transition probability
+>>> beta = 0.95  # Discount factor
+>>> ddp = qe.markov.DiscreteDP(R, Q, beta, s_indices, a_indices)
+```
+
+- Solve using *value iteration* method
+
+```python
+>>> res = ddp.solve(method='value_iteration', v_init=[0, 0], epsilon=0.01)
+>>> res.sigma  # (Approximate) optimal policy function
+array([0, 0])
+>>> res.v  # (Approximate) optimal value function
+array([ -8.5665053 , -19.99507673])
+```
+
+- Solve using *policy iteration* method
+
+```python
+>>> res = ddp.solve(method='policy_iteration', v_init=[0, 0])
+>>> res.sigma  # Optimal policy function
+array([0, 0])
+>>> res.v  # Optimal value function
+array([ -8.57142857, -20.        ])
+```
+
+Similary, we can also solve using the other two methods -  *modified policy iteration* and *linear programming* by changing the *method* name in `ddp.solve`.
+
+
 # References
