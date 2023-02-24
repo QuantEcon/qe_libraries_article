@@ -163,10 +163,12 @@ This module contains a linear programming solver based on the simplex
 method - `linprog_simplex`, which helps to solve the following optimization problem.
 
 $$
-    \min_x \ & c^T x \\
-    \mbox{such that} \ & A_{ub} x \leq b_{ub},\\
-    & A_{eq} x = b_{eq},\\
-    & l \leq x \leq u
+    \begin{aligned}
+    \min_{x} \ & c^T x \\
+    \mbox{subject to } \ & A_{ub} x \leq b_{ub}, \\
+    & A_{eq} x = b_{eq}, \\
+    & l \leq x \leq u \\
+    \end{aligned}
 $$
 
 The following snippet solves the [Klee-Minty ](https://www.math.ubc.ca/~israel/m340/kleemin3.pdf) problem.
@@ -207,8 +209,8 @@ returns maximizer value, maximum value attained and some extra information relat
 ... def f(x):
 ...     return -(x + 2.0)**2 + 1.0
 ...
->>> qe.optimize.brent_max(f, -2, 2) # x, max_value_of_f, extra_info
-(-1.999994371326411, 0.999999999968318, (0, 28))
+>>> qe.optimize.brent_max(f, -3, 2) # x, max_value_of_f, extra_info
+(-2.0, 1.0, (0, 6))
 ```
 
 ### Root Finding
@@ -223,7 +225,7 @@ Presently, quantecon has the following implementations:
 - newton_secant
 
 The following snippet uses `brentq` to find the root of the function $f$
-in the interval $[1, 2]$.
+in the interval $(-1, 2)$.
 
 ```python
 >>> @njit
