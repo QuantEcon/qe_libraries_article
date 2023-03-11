@@ -287,4 +287,40 @@ Linear Quadratic control system
   - k (number of control variables) : 2
   - j (number of shocks)            : 1
 ```
+
+### Graph Tools
+
+The library contains a class `DiGraph` for a directed graph storing
+information about the graph structure such as strong connectivity,
+periodicity, cyclic components, etc.
+
+```python
+>>> adj_matrix = [[1, 0, 1], [1, 0, 1], [1, 1, 1]]
+>>> node_labels = np.array(['a', 'b', 'c'])
+>>> g = qe.DiGraph(adj_matrix, node_labels=node_labels)
+>>> g
+Directed Graph:
+  - n(number of nodes): 3
+```
+
+- Check if the graph is strongly connected
+
+```python
+>>> g.is_strongly_connected
+True
+```
+
+- Find the period of the graph
+
+```python
+>>> g.period
+1
+```
+
+- Find the cyclic components
+
+```python
+>>> g.cyclic_components
+[array(['a', 'b', 'c'], dtype='<U1')]
+```
 # References
