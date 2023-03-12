@@ -28,14 +28,14 @@ QuantEcon is a NumFOCUS fiscally sponsored project dedicated to development and 
 
 # QuantEcon Capabilities
 
-This section gives a basic introduction of QuantEcon and it's usage. The `quantecon` python library consists of the following major modules:
+This section gives a basic introduction of `quantecon` and it's usage. The `quantecon` python library consists of the following major modules:
 
 - Game Theory (`game_theory`)
 - Markov Chains (`markov`)
 - Optimization algorithms (`optimize`)
 - Random generation utilities (`random`)
 
-The library also has some other submodules containing utility functions, implementation of kalman filters, tools for directed graphs, algorithm for solving linear quadratic control, etc.
+The library also has some other submodules containing utility functions and miscellaneous tools like implementation of kalman filters, tools for directed graphs, algorithm for solving linear quadratic control, etc.
 
 ## Markov Chains
 
@@ -236,4 +236,91 @@ in the interval $(-1, 2)$.
 results(root=0.40829350427935973, function_calls=12, iterations=11, converged=True)
 ```
 
+## Miscellaneous tools
+
+The library also contains some other tools that help in tackling problems
+like linear quadratic optimal control, analyzing dynamic linear economies, discrete lyapunov equation, etc. The brief overview of some of these routines is given below:
+
+### Matrix equations
+
+The function `solve_discrete_lyapunov` helps to compute the solution of
+the discrete lyapunov equation given by:
+
+$$
+  AXA' - X + B = 0
+$$
+
+```python
+>>> A = np.ones((2, 2)) * .5
+>>> B = np.array([[.5, -.5], [-.5, .5]])
+>>> qe.solve_discrete_lyapunov(A, B)
+array([[ 0.5, -0.5],
+       [-0.5,  0.5]])
+```
+
+Similarly, the function `solve_discrete_riccati` computes the solution of
+the discrete-time algebraic Riccati equation:
+
+$$
+  X = A'XA - (N + B'XA)'(B'XB + R)^{-1}(N + B'XA) + Q
+$$
+
+### LQ Control
+
+The library has a class `LQ` for analyzing linear quadratic optimal
+control problems of either the infinite horizon form or the finite horizon form.
+
+```python
+>>> Q = np.array([[0., 0.], [0., 1]])
+>>> R = np.array([[1., 0.], [0., 0]])
+>>> RF = np.eye(2) * 100
+>>> A = np.ones((2, 2)) * .95
+>>> B = np.ones((2, 2)) * -1
+>>> beta = .95
+>>> T = 1
+>>> lq_mat = qe.LQ(Q, R, A, B, beta=beta, T=T, Rf=RF)
+>>> lq_mat
+Linear Quadratic control system
+  - beta (discount parameter)       : 0.95
+  - T (time horizon)                : 1
+  - n (number of state variables)   : 2
+  - k (number of control variables) : 2
+  - j (number of shocks)            : 1
+```
+
+### Graph Tools
+
+The library contains a class `DiGraph` for a directed graph storing
+information about the graph structure such as strong connectivity,
+periodicity, cyclic components, etc.
+
+```python
+>>> adj_matrix = [[1, 0, 1], [1, 0, 1], [1, 1, 1]]
+>>> node_labels = np.array(['a', 'b', 'c'])
+>>> g = qe.DiGraph(adj_matrix, node_labels=node_labels)
+>>> g
+Directed Graph:
+  - n(number of nodes): 3
+```
+
+- Check if the graph is strongly connected
+
+```python
+>>> g.is_strongly_connected
+True
+```
+
+- Find the period of the graph
+
+```python
+>>> g.period
+1
+```
+
+- Find the cyclic components
+
+```python
+>>> g.cyclic_components
+[array(['a', 'b', 'c'], dtype='<U1')]
+```
 # References
