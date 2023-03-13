@@ -37,6 +37,58 @@ This section gives a basic introduction of `quantecon` and it's usage. The `quan
 
 The library also has some other submodules containing utility functions and miscellaneous tools like implementation of kalman filters, tools for directed graphs, algorithm for solving linear quadratic control, etc.
 
+
+## Game Theory
+
+The `game_theory` submodule provides efficient implementation of state-of-the-art
+algorithms for computing Nash equilibria of normal form games,
+the Lemke-Howson algorithm, the McLennan-Tourky algorithm and
+several learning/evolutionary dynamics algorithms, such as
+fictitious play (and its stochastic version),
+best response dynamics (and its stochastic version),
+local interaction dynamics, and logit response dynamics.
+
+It can also compute all mixed Nash equilibria of a 2-player (non-degenerate) normal form game by support enumeration and vertex enumeration respectively.
+
+```python
+>>> bimatrix = [[(1, 1), (-1, 0)],
+...             [(-1, 0), (1, 0)],
+...             [(0, 0), (0, 0)]]
+>>> g = qe.game_theory.NormalFormGame(bimatrix)
+>>> qe.game_theory.support_enumeration(g)
+[(array([1., 0., 0.]), array([1., 0.])), (array([0., 1., 0.]), array([0., 1.]))]
+>>> qe.game_theory.vertex_enumeration(g)
+[(array([1., 0., 0.]), array([1., 0.]))]
+```
+
+The following snippet computes mixed Nash equilibria of a
+2-player normal form game by the Lemke-Howson algorithm.
+
+```python
+>>> bimatrix = [[(3, 3), (3, 2)],
+...             [(2, 2), (5, 6)],
+...             [(0, 3), (6, 1)]]
+>>> g = qe.game_theory.NormalFormGame(bimatrix)
+>>> qe.game_theory.lemke_howson(g, init_pivot=1)
+(array([0.        , 0.33333333, 0.66666667]), array([0.33333333, 0.66666667]))
+```
+
+Similarly, it can also compute mixed Nash equilibria of an
+N-player normal form game by applying the imitation
+game algorithm by McLennan and Tourky to the best response correspondence.
+
+```python
+>>> N = 3
+>>> v = 2
+>>> payoff_array = np.empty((2,)*N)
+>>> payoff_array[0, :] = 1
+>>> payoff_array[1, :] = 0
+>>> payoff_array[1].flat[0] = v
+>>> g = qe.game_theory.NormalFormGame((qe.game_theory.Player(payoff_array), ) * N)
+>>> qe.game_theory.mclennan_tourky(g, epsilon=1e-5)
+(array([0.70710754, 0.29289246]), array([0.70710754, 0.29289246]), array([0.70710754, 0.29289246]))
+```
+
 ## Markov Chains
 
 The `quantecon.markov` module deals with the computations related to the markov chains.
