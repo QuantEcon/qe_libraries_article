@@ -2,7 +2,6 @@
 title: 'QuantEcon'
 tags:
   - Python
-  - Julia
   - economics
 authors:
   - name: ABC
@@ -375,4 +374,26 @@ True
 >>> g.cyclic_components
 [array(['a', 'b', 'c'], dtype='<U1')]
 ```
+
+# Implementation choices
+
+The `quantecon` provides fundamental algorithms used in
+high performance computational economics.
+
+In terms of software systems and architecture, `quantecon`
+version is built using the standard libraries such as  NumPy and SciPy
+while leveraging Numba's JIT compilation technology wherever possible
+along with automatic parallelization and caching wherever possible.
+
+We strictly restrict ourselves to depend only on libraries available in
+[Anaconda](https://www.anaconda.com/) for installation and maintenance ease,
+while we try our best not to sacrifice the efficiency (speed) of the code by using Numba.
+
+
+# Future Work
+
+QuantEcon aims to extend it's current implementation to other backend
+libraries like JAX or other GPU providing libraries to utilize the
+modern computing systems and provide lighting speed ups.
+
 # References
