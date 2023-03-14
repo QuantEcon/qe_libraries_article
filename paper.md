@@ -395,4 +395,5 @@ while we try our best not to sacrifice the efficiency (speed) of the code by usi
 QuantEcon aims to extend it's current implementation to other backend
 libraries like JAX or other GPU providing libraries to utilize the
 modern computing systems and provide lighting speed ups.
+
 # References
