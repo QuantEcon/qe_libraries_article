@@ -23,11 +23,71 @@ bibliography: paper.bib
 
 # Summary
 
-QuantEcon is a NumFOCUS fiscally sponsored project dedicated to development and documentation of modern open source computational tools for economics, econometrics, and decision making.
+Economics has traditionally relied on tractable mathematical models, diagrams,
+and simple regression methods to analyze and understand economic phenomena.
+However, in recent decades economists have increasingly shifted towards more
+computationally challenging problems, involving large numbers of heterogeneous
+agents and complex nonlinear interactions.
 
-# QuantEcon Capabilities
+QuantEcon.py is an open-source software library that helps to support this shift
+towards more computational intensive research in the field of economics.  First
+released in 2014, QuantEcon.py has been under continuous development for around
+9 years. The library includes a wide range of functions for economic analysis,
+including numerical methods, data visualization, estimation, and dynamic
+programming. The library includes a number of fundamental algorithms used in
+high performance computational economics. In this article we review the key
+features of the the library.
 
-This section gives a basic introduction of `quantecon` and it's usage. The `quantecon` python library consists of the following major modules:
+# Statement of Need
+
+Economists use a variety of economic, statistical and mathematical models as
+building blocks for constructing larger and more fully-featured models. Some of
+these are relatively unique to economics and finance. For example, many
+macroeconomic and financial models include a stochastic volatility component,
+since asset markets often exhibit bursts of volatility. Other building blocks
+involve optimization routines, such as firms that maximize present value given
+estimated time paths for profits and interest rates.  Firms modeled in this way
+are then plugged into larger models that contain households, banks and other
+economic agents.
+
+QuantEcon.py focuses on supplying building blocks for constructing economic
+models that are fast, efficient and simple to modify.  This encourages code
+re-use across the economics community, without enforcing particular model 
+structure through a top-down development process.
+
+
+# Implementation Choices
+
+
+In terms of software systems and architecture, QuantEcon.py version is built on
+top of standard libraries such as NumPy and SciPy, while also heavily leveraging
+Numba's JIT compilation technology, combined with automatic parallelization and
+caching when possible.  (Numba is a just-in-time (JIT) compiler for Python first
+developed by Continuum Analytics that can generate optimized machine code at
+run-time.)  JIT-based acceleration is essential to QuantEcon's strategy of
+providing code for computational economics that is performant, portable and easy
+to modify.
+
+For installation and maintenance ease, QuantEcon maintainers restrict
+contributions to depend on libraries available in [Anaconda](https://www.anaconda.com/).
+
+
+# Status
+
+QuantEcon.py is released under the open-source MIT License and is partly
+maintained and supported by QuantEcon, a NumFOCUS fiscally sponsored project
+dedicated to development and documentation of modern open source computational
+tools for economics, econometrics, and decision making.
+
+QuantEcon.py is available through the Python Package Index (as a `pip` install)
+or through `conda` under the name `quantecon`.
+
+
+
+# Capabilities
+
+This section gives a basic introduction of `quantecon` and it's usage. The
+`quantecon` python library consists of the following major modules:
 
 - Game Theory (`game_theory`)
 - Markov Chains (`markov`)
@@ -204,7 +264,7 @@ array([ -8.57142857, -20.        ])
 
 Similary, we can also solve using the other two methods -  *modified policy iteration* and *linear programming* by changing the *method* name in `ddp.solve`.
 
-## Optimize
+# Optimize
 
 The `optimize` module provides various routines to tackle the optimization problems.
 
@@ -374,20 +434,6 @@ True
 >>> g.cyclic_components
 [array(['a', 'b', 'c'], dtype='<U1')]
 ```
-
-# Implementation choices
-
-The `quantecon` provides fundamental algorithms used in
-high performance computational economics.
-
-In terms of software systems and architecture, `quantecon`
-version is built using the standard libraries such as  NumPy and SciPy
-while leveraging Numba's JIT compilation technology wherever possible
-along with automatic parallelization and caching wherever possible.
-
-We strictly restrict ourselves to depend only on libraries available in
-[Anaconda](https://www.anaconda.com/) for installation and maintenance ease,
-while we try our best not to sacrifice the efficiency (speed) of the code by using Numba.
 
 
 # Future Work
