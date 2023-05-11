@@ -4,19 +4,49 @@ tags:
   - Python
   - economics
 authors:
-  - name: ABC
-    affiliation: 1
-  - name: DEF
+  - name: Quentin Batista
+    affiliation: 7
+  - name: Chase Coleman
+    affiliation: 5
+  - name: Oyamad Diasuke
     affiliation: 2
-  - name: XYZ
-    affiliation: 3
-affiliations:
-  - name: University1
+  - name: Yuya Furusawa
+    affiliation: 2
+  - name: Shu Hu
     index: 1
-  - name: University2
+  - name: Smit Lunagariya
+    affiliation: 3
+  - name: Spencer Lyon
+    affiliation: 4
+  - name: Matthew McKay
+    affiliation: 1
+  - name: Thomas J. Sargent
+    index: 6
+  - name: Zejin Shi
+    index: 7  
+  - name: John Stachurski
+    affiliation: 1
+  - name: Natasha Watkins
+    index: 1
+  - name: Humphrey Yang
+    index: 1
+  - name: Hengcheng Zhang
+    index: 1
+affiliations:
+  - name: The Australian National University
+    index: 1
+  - name: University of Tokyo
     index: 2
-  - name: University3
+  - name: TBD
     index: 3
+  - name: TBD
+    index: 4
+  - name: TBD
+    index: 5
+  - name: New York University
+    index: 6
+  - name: MIT
+    index: 6
 date: 13 December 2023
 bibliography: paper.bib
 ---
@@ -29,9 +59,11 @@ However, in recent decades economists have increasingly shifted towards more
 computationally challenging problems, involving large numbers of heterogeneous
 agents and complex nonlinear interactions.
 
-QuantEcon.py is an open-source software library that helps to support this shift
+[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is an open-source 
+software library that helps to support this shift
 towards more computational intensive research in the field of economics.  First
-released in 2014, QuantEcon.py has been under continuous development for around
+released in 2014, [QuantEcon.py](https://github.com/quantecon/QuantEcon.py) 
+has been under continuous development for around
 9 years. The library includes a wide range of functions for economic analysis,
 including numerical methods, data visualization, estimation, and dynamic
 programming. The library includes a number of fundamental algorithms used in
@@ -50,7 +82,8 @@ estimated time paths for profits and interest rates.  Firms modeled in this way
 are then plugged into larger models that contain households, banks and other
 economic agents.
 
-QuantEcon.py focuses on supplying building blocks for constructing economic
+[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) focuses on 
+supplying building blocks for constructing economic
 models that are fast, efficient and simple to modify.  This encourages code
 re-use across the economics community, without enforcing particular model 
 structure through a top-down development process.
@@ -59,11 +92,11 @@ structure through a top-down development process.
 # Implementation Choices
 
 
-In terms of software systems and architecture, QuantEcon.py version is built on
-top of standard libraries such as NumPy and SciPy, while also heavily leveraging
-Numba's JIT compilation technology, combined with automatic parallelization and
-caching when possible.  (Numba is a just-in-time (JIT) compiler for Python first
-developed by Continuum Analytics that can generate optimized machine code at
+In terms of software systems and architecture, [QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is built on
+top of standard libraries such as [NumPy](https://numpy.org) and [SciPy](https://scipy.org), while also heavily leveraging
+[Numba](https://numba.pydata.org) for just-in-time (JIT) code acceleration, combined with automatic parallelization and
+caching when possible.  ([Numba](https://numba.pydata.org) is a just-in-time (JIT) compiler for Python first
+developed by Continuum Analytics that can generate optimized LLVM machine code at
 run-time.)  JIT-based acceleration is essential to QuantEcon's strategy of
 providing code for computational economics that is performant, portable and easy
 to modify.
@@ -74,15 +107,24 @@ contributions to depend on libraries available in [Anaconda](https://www.anacond
 
 # Status
 
-QuantEcon.py is released under the open-source MIT License and is partly
+[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is released under the 
+open-source MIT License and is partly
 maintained and supported by QuantEcon, a NumFOCUS fiscally sponsored project
 dedicated to development and documentation of modern open source computational
 tools for economics, econometrics, and decision making.
 
-QuantEcon.py is available through the Python Package Index (as a `pip` install)
-or through `conda` under the name `quantecon`.
+[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is available through
+the [Python Package Index](https://pypi.org/project/quantecon/):
 
+```bash
+pip install quantecon
+```
 
+or through `conda`:
+
+```bash
+conda install -c conda-forge quantecon
+```
 
 # Capabilities
 
@@ -94,7 +136,9 @@ This section gives a basic introduction of `quantecon` and it's usage. The
 - Optimization algorithms (`optimize`)
 - Random generation utilities (`random`)
 
-The library also has some other submodules containing utility functions and miscellaneous tools like implementation of kalman filters, tools for directed graphs, algorithm for solving linear quadratic control, etc.
+The library also has some other submodules containing utility functions and
+miscellaneous tools such as implementations of kalman filters, tools for directed
+graphs, algorithm for solving linear quadratic control, etc.
 
 
 ## Game Theory
@@ -107,7 +151,8 @@ fictitious play (and its stochastic version),
 best response dynamics (and its stochastic version),
 local interaction dynamics, and logit response dynamics.
 
-It can also compute all mixed Nash equilibria of a 2-player (non-degenerate) normal form game by support enumeration and vertex enumeration respectively.
+It can also compute all mixed Nash equilibria of a 2-player (non-degenerate)
+normal form game by support enumeration and vertex enumeration respectively.
 
 ```python
 >>> bimatrix = [[(1, 1), (-1, 0)],
@@ -150,9 +195,9 @@ game algorithm by McLennan and Tourky to the best response correspondence.
 
 ## Markov Chains
 
-The `quantecon.markov` module deals with the computations related to the markov chains.
+The `quantecon.markov` module deals with the computations related to markov chains.
 
-This module contains a class `MarkovChain` which represents finite-state discrete-time Markov chain.
+This module contains a class `MarkovChain` which represents finite-state discrete-time Markov chains.
 
 ```python
 >>> P = np.array([
@@ -162,22 +207,21 @@ This module contains a class `MarkovChain` which represents finite-state discret
 >>> mc = qe.MarkovChain(P)
 ```
 
-The `MarkovChain` object consists of many useful information like:
+The `MarkovChain` object provides access to useful information such as:
 
 - List of stationary distributions
-
 ```python
 >>> mc.stationary_distributions
 array([[0., 1.]])
 ```
 
-- Indicates whether the Markov chain is irreducible
+- Indication of whether the Markov chain is irreducible
 ```python
 >>> mc.is_irreducible
 False
 ```
 
-- Indicates whether the Markov chain is aperiodic
+- Indication of whether the Markov chain is aperiodic
 ```python
 >>> mc.is_aperiodic
 True
@@ -195,7 +239,9 @@ True
 array([0, 1, 1, 1, 1])
 ```
 
-The `MarkovChain` object is also capable of computing many different features like the number of the recurrent classes, period of the Markov chain, list of cyclic classes, etc.
+The `MarkovChain` object is also capable of computing many different features
+like the number of the recurrent classes, period of the Markov chain, list of
+cyclic classes, etc.
 
 It is also possible to construct a `MarkovChain` object using approximation:
 
@@ -211,8 +257,8 @@ $$
 array([-1.73205081, -0.57735027,  0.57735027,  1.73205081])
 ```
 
-- `rouwenhorst`: estimates a stationary AR(1) process. The Rouwenhorst approximation uses the recursive defintion for approximating a distribution.
-
+- `rouwenhorst`: estimates a stationary AR(1) process. The Rouwenhorst approximation 
+  uses the recursive defintion for approximating a distribution.
 
 $$
 y_t = \mu + \rho y_{t-1} + \varepsilon_t
@@ -224,7 +270,8 @@ $$
 array([-1.        , -0.33333333,  0.33333333,  1.        ])
 ```
 
-The `quantecon.markov` module can also be used for solving discrete dynamic programs (also known as Markov decision processes) with finite states and actions.
+The `quantecon.markov` module can also be used for solving discrete dynamic
+programs (also known as Markov decision processes) with finite states and actions.
 
 The `DiscreteDP` class currently implements the following solution algorithms:
 
@@ -262,7 +309,8 @@ array([0, 0])
 array([ -8.57142857, -20.        ])
 ```
 
-Similary, we can also solve using the other two methods -  *modified policy iteration* and *linear programming* by changing the *method* name in `ddp.solve`.
+Similary, we can also solve using using *modified policy iteration* 
+and *linear programming* by changing the *method* name in `ddp.solve`.
 
 # Optimize
 
@@ -274,12 +322,12 @@ This module contains a linear programming solver based on the simplex
 method - `linprog_simplex`, which helps to solve the following optimization problem.
 
 $$
-    \begin{aligned}
-    \min_{x} \ & c^T x \\
-    \mbox{subject to } \ & A_{ub} x \leq b_{ub}, \\
-    & A_{eq} x = b_{eq}, \\
-    & l \leq x \leq u \\
-    \end{aligned}
+\begin{aligned}
+\min_{x} \ & c^T x \\
+\mbox{subject to } \ & A_{ub} x \leq b_{ub}, \\
+& A_{eq} x = b_{eq}, \\
+& l \leq x \leq u \\
+\end{aligned}
 $$
 
 The following snippet solves the [Klee-Minty ](https://www.math.ubc.ca/~israel/m340/kleemin3.pdf) problem.
@@ -311,9 +359,10 @@ results(x=array([0.99999814, 0.99999756]), fun=-1.6936258239463265e-10, success=
        [0.99999814, 0.99999756]]))
 ```
 
-There's also another scalar maximization function - `brentq_max` which
+There's also the scalar maximization function - `brentq_max` which
 maximizes the function within the given bounded intervals and
-returns maximizer value, maximum value attained and some extra information related to convergence and number of iterations.
+returns maximizer value, maximum value attained and some additional 
+information related to convergence and number of iterations.
 
 ```python
 >>> @njit
@@ -350,7 +399,9 @@ results(root=0.40829350427935973, function_calls=12, iterations=11, converged=Tr
 ## Miscellaneous tools
 
 The library also contains some other tools that help in tackling problems
-like linear quadratic optimal control, analyzing dynamic linear economies, discrete lyapunov equation, etc. The brief overview of some of these routines is given below:
+like linear quadratic optimal control, analyzing dynamic linear economies, 
+discrete lyapunov equation, etc. The brief overview of some of these routines 
+is given below:
 
 ### Matrix equations
 
@@ -358,7 +409,7 @@ The function `solve_discrete_lyapunov` helps to compute the solution of
 the discrete lyapunov equation given by:
 
 $$
-  AXA' - X + B = 0
+AXA' - X + B = 0
 $$
 
 ```python
@@ -373,7 +424,7 @@ Similarly, the function `solve_discrete_riccati` computes the solution of
 the discrete-time algebraic Riccati equation:
 
 $$
-  X = A'XA - (N + B'XA)'(B'XB + R)^{-1}(N + B'XA) + Q
+X = A'XA - (N + B'XA)'(B'XB + R)^{-1}(N + B'XA) + Q
 $$
 
 ### LQ Control
@@ -401,9 +452,9 @@ Linear Quadratic control system
 
 ### Graph Tools
 
-The library contains a class `DiGraph` for a directed graph storing
-information about the graph structure such as strong connectivity,
-periodicity, cyclic components, etc.
+The library contains a class `DiGraph` to represent directed graphs
+and provides information about the graph structure such as strong 
+connectivity, speriodicity, cyclic components, etc.
 
 ```python
 >>> adj_matrix = [[1, 0, 1], [1, 0, 1], [1, 1, 1]]
@@ -438,8 +489,10 @@ True
 
 # Future Work
 
-QuantEcon aims to extend it's current implementation to other backend
+QuantEcon aims to extend its current implementation to other backend
 libraries like JAX or other GPU providing libraries to utilize the
-modern computing systems and provide lighting speed ups.
+modern computing systems and provide faster execution speeds.
+
+The [documentation is available on readthedocs](https://quanteconpy.readthedocs.io/en/latest/)
 
 # References
