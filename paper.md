@@ -23,7 +23,7 @@ authors:
   - name: Thomas J. Sargent
     index: 6
   - name: Zejin Shi
-    index: 7  
+    index: 7
   - name: John Stachurski
     affiliation: 1
   - name: Natasha Watkins
@@ -49,6 +49,8 @@ affiliations:
     index: 6
 date: 13 December 2023
 bibliography: paper.bib
+nocite: |
+  @*
 ---
 
 # Summary
@@ -59,10 +61,10 @@ However, in recent decades economists have increasingly shifted towards more
 computationally challenging problems, involving large numbers of heterogeneous
 agents and complex nonlinear interactions.
 
-[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is an open-source 
+[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is an open-source
 software library that helps to support this shift
 towards more computational intensive research in the field of economics.  First
-released in 2014, [QuantEcon.py](https://github.com/quantecon/QuantEcon.py) 
+released in 2014, [QuantEcon.py](https://github.com/quantecon/QuantEcon.py)
 has been under continuous development for around
 9 years. The library includes a wide range of functions for economic analysis,
 including numerical methods, data visualization, estimation, and dynamic
@@ -82,10 +84,10 @@ estimated time paths for profits and interest rates.  Firms modeled in this way
 are then plugged into larger models that contain households, banks and other
 economic agents.
 
-[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) focuses on 
+[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) focuses on
 supplying building blocks for constructing economic
 models that are fast, efficient and simple to modify.  This encourages code
-re-use across the economics community, without enforcing particular model 
+re-use across the economics community, without enforcing particular model
 structure through a top-down development process.
 
 
@@ -107,7 +109,7 @@ contributions to depend on libraries available in [Anaconda](https://www.anacond
 
 # Status
 
-[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is released under the 
+[QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is released under the
 open-source MIT License and is partly
 maintained and supported by QuantEcon, a NumFOCUS fiscally sponsored project
 dedicated to development and documentation of modern open source computational
@@ -257,7 +259,7 @@ $$
 array([-1.73205081, -0.57735027,  0.57735027,  1.73205081])
 ```
 
-- `rouwenhorst`: estimates a stationary AR(1) process. The Rouwenhorst approximation 
+- `rouwenhorst`: estimates a stationary AR(1) process. The Rouwenhorst approximation
   uses the recursive defintion for approximating a distribution.
 
 $$
@@ -309,7 +311,7 @@ array([0, 0])
 array([ -8.57142857, -20.        ])
 ```
 
-Similary, we can also solve using using *modified policy iteration* 
+Similary, we can also solve using using *modified policy iteration*
 and *linear programming* by changing the *method* name in `ddp.solve`.
 
 # Optimize
@@ -361,7 +363,7 @@ results(x=array([0.99999814, 0.99999756]), fun=-1.6936258239463265e-10, success=
 
 There's also the scalar maximization function - `brentq_max` which
 maximizes the function within the given bounded intervals and
-returns maximizer value, maximum value attained and some additional 
+returns maximizer value, maximum value attained and some additional
 information related to convergence and number of iterations.
 
 ```python
@@ -399,8 +401,8 @@ results(root=0.40829350427935973, function_calls=12, iterations=11, converged=Tr
 ## Miscellaneous tools
 
 The library also contains some other tools that help in tackling problems
-like linear quadratic optimal control, analyzing dynamic linear economies, 
-discrete lyapunov equation, etc. The brief overview of some of these routines 
+like linear quadratic optimal control, analyzing dynamic linear economies,
+discrete lyapunov equation, etc. The brief overview of some of these routines
 is given below:
 
 ### Matrix equations
@@ -453,7 +455,7 @@ Linear Quadratic control system
 ### Graph Tools
 
 The library contains a class `DiGraph` to represent directed graphs
-and provides information about the graph structure such as strong 
+and provides information about the graph structure such as strong
 connectivity, speriodicity, cyclic components, etc.
 
 ```python
