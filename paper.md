@@ -37,7 +37,7 @@ affiliations:
     index: 1
   - name: University of Tokyo
     index: 2
-  - name: TBD
+  - name: Indian Institute of Technology (BHU), Varanasi
     index: 3
   - name: New York University
     index: 4
