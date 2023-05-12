@@ -13,7 +13,7 @@ authors:
   - name: Yuya Furusawa
     affiliation: 8
   - name: Shu Hu
-    index: 1
+    affiliation: 1
   - name: Smit Lunagariya
     affiliation: 3
   - name: Spencer Lyon
@@ -27,11 +27,11 @@ authors:
   - name: John Stachurski
     affiliation: 1
   - name: Natasha Watkins
-    index: 1
+    affiliation: 1
   - name: Humphrey Yang
-    index: 1
+    affiliation: 1
   - name: Hengcheng Zhang
-    index: 1
+    affiliation: 1
 affiliations:
   - name: The Australian National University
     index: 1
