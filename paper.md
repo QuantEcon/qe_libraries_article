@@ -11,7 +11,7 @@ authors:
   - name: Oyamad Diasuke
     affiliation: 2
   - name: Yuya Furusawa
-    affiliation: 2
+    affiliation: 8
   - name: Shu Hu
     index: 1
   - name: Smit Lunagariya
@@ -42,7 +42,11 @@ affiliations:
   - name: New York University
     index: 4
   - name: MIT
-    index: 6
+    index: 7
+  - name: Crop.inc
+    index: 8
+  - name: University of Arizona
+    index: 9
 date: 13 December 2023
 bibliography: paper.bib
 nocite: |
