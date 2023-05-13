@@ -21,7 +21,7 @@ authors:
   - name: Matthew McKay
     affiliation: 1
   - name: Thomas J. Sargent
-    index: 4
+    affiliation: 4
   - name: Zejin Shi
     index: 7
   - name: John Stachurski
