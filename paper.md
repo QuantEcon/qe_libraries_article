@@ -324,7 +324,7 @@ array([ -8.57142857, -20.        ])
 Similary, we can also solve using using *modified policy iteration*
 and *linear programming* by changing the *method* name in `ddp.solve`.
 
-# Optimize
+## Optimize
 
 The `optimize` module provides various routines to tackle the optimization problems.
 
