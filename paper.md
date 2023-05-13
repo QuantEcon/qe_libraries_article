@@ -7,7 +7,7 @@ authors:
   - name: Quentin Batista
     affiliation: 7
   - name: Chase Coleman
-    affiliation: 5
+    affiliation: 4
   - name: Oyamad Diasuke
     affiliation: 2
   - name: Yuya Furusawa
@@ -21,7 +21,7 @@ authors:
   - name: Matthew McKay
     affiliation: 1
   - name: Thomas J. Sargent
-    index: 6
+    index: 4
   - name: Zejin Shi
     index: 7
   - name: John Stachurski
@@ -39,12 +39,8 @@ affiliations:
     index: 2
   - name: TBD
     index: 3
-  - name: TBD
-    index: 4
-  - name: TBD
-    index: 5
   - name: New York University
-    index: 6
+    index: 4
   - name: MIT
     index: 6
 date: 13 December 2023
