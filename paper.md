@@ -157,6 +157,11 @@ It can also compute all mixed Nash equilibria of a 2-player (non-degenerate)
 normal form game by support enumeration and vertex enumeration respectively.
 
 ```python
+>>> import quantecon as qe
+>>> import numpy as np
+```
+
+```python
 >>> bimatrix = [[(1, 1), (-1, 0)],
 ...             [(-1, 0), (1, 0)],
 ...             [(0, 0), (0, 0)]]
