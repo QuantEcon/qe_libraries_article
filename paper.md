@@ -2,18 +2,18 @@
 title: 'QuantEcon'
 tags:
   - Python
-  - economics
+  - Economics
 authors:
   - name: Quentin Batista
-    affiliation: 7
+    affiliation: 5
   - name: Chase Coleman
     affiliation: 4
   - name: Oyamad Diasuke
     affiliation: 2
   - name: Yuya Furusawa
-    affiliation: 2
+    affiliation: 6
   - name: Shu Hu
-    index: 1
+    affiliation: 1
   - name: Smit Lunagariya
     affiliation: 3
   - name: Spencer Lyon
@@ -23,26 +23,30 @@ authors:
   - name: Thomas J. Sargent
     affiliation: 4
   - name: Zejin Shi
-    index: 7
+    affiliation: 7
   - name: John Stachurski
     affiliation: 1
   - name: Natasha Watkins
-    index: 1
+    affiliation: 1
   - name: Humphrey Yang
-    index: 1
+    affiliation: 1
   - name: Hengcheng Zhang
-    index: 1
+    affiliation: 1
 affiliations:
   - name: The Australian National University
     index: 1
   - name: University of Tokyo
     index: 2
-  - name: TBD
+  - name: Indian Institute of Technology (BHU), Varanasi
     index: 3
   - name: New York University
     index: 4
   - name: MIT
+    index: 5
+  - name: Crop.inc
     index: 6
+  - name: University of Arizona
+    index: 7
 date: 13 December 2023
 bibliography: paper.bib
 nocite: |
