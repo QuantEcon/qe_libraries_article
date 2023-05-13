@@ -196,8 +196,13 @@ game algorithm by McLennan and Tourky to the best response correspondence.
 >>> payoff_array[1, :] = 0
 >>> payoff_array[1].flat[0] = v
 >>> g = qe.game_theory.NormalFormGame((qe.game_theory.Player(payoff_array), ) * N)
->>> qe.game_theory.mclennan_tourky(g, epsilon=1e-5)
-(array([0.70710754, 0.29289246]), array([0.70710754, 0.29289246]), array([0.70710754, 0.29289246]))
+>>> res = qe.game_theory.mclennan_tourky(g, epsilon=1e-5)
+>>> res[0]
+array([0.70710754, 0.29289246])
+>>> res[1]
+array([0.70710754, 0.29289246])
+>>> res[2]
+array([0.70710754, 0.29289246])
 ```
 
 ## Markov Chains
@@ -346,8 +351,9 @@ The following snippet solves the [Klee-Minty ](https://www.math.ubc.ca/~israel/m
 ...         [200, 20, 1]]
 >>> b_ub = [1, 100, 10000]
 >>> c, A_ub, b_ub = map(np.asarray, [c, A_ub, b_ub])
->>> qe.optimize.linprog_simplex(c, A_ub=A_ub, b_ub=b_ub)
-SimplexResult(x=array([    0.,     0., 10000.]), lambd=array([0., 0., 1.]), fun=10000.0, success=True, status=0, num_iter=9)
+>>> res = qe.optimize.linprog_simplex(c, A_ub=A_ub, b_ub=b_ub)
+>>> res.x, res.fun, res.success
+(array([    0.,     0., 10000.]), 10000.0, True)
 ```
 
 ### Scalar Maximization
@@ -355,15 +361,15 @@ SimplexResult(x=array([    0.,     0., 10000.]), lambd=array([0., 0., 1.]), fun=
 The `optimize` module implements the Nelder-Mead algorithm for maximizing a scalar-valued function with one or more variables.
 
 ```python
+>>> from numba import njit
 >>> @njit
 ... def rosenbrock(x):
 ...     return -(100 * (x[1] - x[0] ** 2) ** 2 + (1 - x[0])**2)
 ...
 >>> x0 = np.array([-2, 1])
->>> qe.optimize.nelder_mead(rosenbrock, x0)
-results(x=array([0.99999814, 0.99999756]), fun=-1.6936258239463265e-10, success=True, nit=110, final_simplex=array([[0.99998652, 0.9999727 ],
-       [1.00000218, 1.00000301],
-       [0.99999814, 0.99999756]]))
+>>> res = qe.optimize.nelder_mead(rosenbrock, x0)
+>>> res.x, res.fun, res.success
+(array([0.99999814, 0.99999756]), -1.6936258239463265e-10, True)
 ```
 
 There's also the scalar maximization function - `brentq_max` which
