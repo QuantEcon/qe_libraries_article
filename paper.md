@@ -26,6 +26,8 @@ authors:
     affiliation: 7
   - name: John Stachurski
     affiliation: 1
+  - name: Pablo Winant
+    affiliation: 8
   - name: Natasha Watkins
     affiliation: 1
   - name: Humphrey Yang
@@ -35,18 +37,20 @@ authors:
 affiliations:
   - name: The Australian National University
     index: 1
-  - name: University of Tokyo
+  - name: The University of Tokyo
     index: 2
   - name: Indian Institute of Technology (BHU), Varanasi
     index: 3
   - name: New York University
     index: 4
-  - name: MIT
+  - name: Massachusetts Institute of Technology
     index: 5
   - name: Crop.inc
     index: 6
-  - name: University of Arizona
+  - name: The University of Arizona
     index: 7
+  - name: ESCP Business School and Ecole Polytechnique
+    index: 8
 date: 13 December 2023
 bibliography: paper.bib
 nocite: |
@@ -55,9 +59,9 @@ nocite: |
 
 # Summary
 
-Economics has traditionally relied on tractable mathematical models, diagrams,
+Economics traditionally relied on tractable mathematical models, diagrams,
 and simple regression methods to analyze and understand economic phenomena.
-However, in recent decades economists have increasingly shifted towards more
+However, in recent decades, economists have increasingly shifted towards more
 computationally challenging problems, involving large numbers of heterogeneous
 agents and complex nonlinear interactions.
 
@@ -106,6 +110,7 @@ to modify.
 For installation and maintenance ease, QuantEcon maintainers restrict
 contributions to depend on libraries available in [Anaconda](https://www.anaconda.com/).
 
+The [documentation is available on readthedocs](https://quanteconpy.readthedocs.io/en/latest/)
 
 # Status
 
@@ -139,7 +144,7 @@ This section gives a basic introduction of `quantecon` and it's usage. The
 - Random generation utilities (`random`)
 
 The library also has some other submodules containing utility functions and
-miscellaneous tools such as implementations of kalman filters, tools for directed
+miscellaneous tools such as implementations of Kalman filters, tools for directed
 graphs, algorithm for solving linear quadratic control, etc.
 
 
@@ -327,6 +332,8 @@ and *linear programming* by changing the *method* name in `ddp.solve`.
 ## Optimize
 
 The `optimize` module provides various routines to tackle the optimization problems.
+The major benefit of these routines relative to other implementations in related
+libraries is JIT-acceleration with Numba.
 
 ### Linear Programming Solver
 
@@ -358,7 +365,9 @@ The following snippet solves the [Klee-Minty ](https://www.math.ubc.ca/~israel/m
 
 ### Scalar Maximization
 
-The `optimize` module implements the Nelder-Mead algorithm for maximizing a scalar-valued function with one or more variables.
+The `optimize` module implements the Nelder-Mead algorithm for maximizing a
+scalar-valued function with one or more variables. This function is JIT-compiled
+via Numba and hence can be embedded in larger functions that also use Numba.
 
 ```python
 >>> from numba import njit
@@ -388,8 +397,8 @@ information related to convergence and number of iterations.
 
 ### Root Finding
 
-It comprises of all the routines that finds the root of the given function.
-Presently, quantecon has the following implementations:
+This module comprises of all the routines that finds the root of the given
+function. Presently, `quantecon` has the following implementations:
 
 - bisect
 - brentq
@@ -502,10 +511,11 @@ True
 
 # Future Work
 
-QuantEcon aims to extend its current implementation to other backend
-libraries like JAX or other GPU providing libraries to utilize the
+QuantEcon developers are considering future projects such as adding more
+equilibrium computation algorithms for N-player games and supporting extensive
+form games. In addition, QuantEcon aims to extend its current implementation to
+other backend libraries like JAX or other GPU providing libraries to utilize the
 modern computing systems and provide faster execution speeds.
 
-The [documentation is available on readthedocs](https://quanteconpy.readthedocs.io/en/latest/)
 
 # References
