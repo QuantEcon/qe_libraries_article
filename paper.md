@@ -384,30 +384,30 @@ via Numba and hence can be embedded in larger functions that also use Numba.
 (array([0.99999814, 0.99999756]), -1.6936258239463265e-10, True)
 ```
 
-There's also the scalar maximization function - `brentq_max` which
-maximizes the function within the given bounded intervals and
-returns maximizer value, maximum value attained and some additional
-information related to convergence and number of iterations.
+There is also the scalar maximization function `brentq_max` which
+maximizes a function within a given bounded interval and
+returns a maximizer, the maximum value attained, and some additional
+information related to convergence and the number of iterations.
 
 ```python
 >>> @njit
 ... def f(x):
 ...     return -(x + 2.0)**2 + 1.0
 ...
->>> qe.optimize.brent_max(f, -3, 2) # x, max_value_of_f, extra_info
+>>> qe.optimize.brent_max(f, -3, 2)  # x, max_value_of_f, extra_info
 (-2.0, 1.0, (0, 6))
 ```
 
 ### Root Finding
 
-This module comprises of all the routines that finds the root of the given
+This module also includes routines that find a root of a given
 function. Presently, `quantecon` has the following implementations:
 
-- bisect
-- brentq
-- newton
-- newton_halley
-- newton_secant
+- `bisect`
+- `brentq`
+- `newton`
+- `newton_halley`
+- `newton_secant`
 
 The following snippet uses `brentq` to find the root of the function $f$
 in the interval $(-1, 2)$.
