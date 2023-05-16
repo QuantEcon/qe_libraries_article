@@ -329,38 +329,41 @@ array([ -8.57142857, -20.        ])
 Similary, we can also solve using using *modified policy iteration*
 and *linear programming* by changing the *method* name in `ddp.solve`.
 
-## Optimize
+## Optimization
 
-The `optimize` module provides various routines to tackle the optimization problems.
+The `optimize` module provides various routines for solving optimization problems
+and root finding.
 The major benefit of these routines relative to other implementations in related
 libraries is JIT-acceleration with Numba.
 
-### Linear Programming Solver
+### Linear Programming
 
 This module contains a linear programming solver based on the simplex
-method - `linprog_simplex`, which helps to solve the following optimization problem.
+method, `linprog_simplex`, which solves a linear program of the following form:
 
 $$
 \begin{aligned}
-\min_{x} \ & c^T x \\
-\mbox{subject to } \ & A_{ub} x \leq b_{ub}, \\
-& A_{eq} x = b_{eq}, \\
-& l \leq x \leq u \\
+\max_{x} \ & c^T x \\
+\text{subject to } \ & A_{\mathrm{ub}} x \leq b_{\mathrm{ub}}, \\
+& A_{\mathrm{eq}} x = b_{\mathrm{eq}}, \\
+& x \geq 0. \\
 \end{aligned}
 $$
 
-The following snippet solves the [Klee-Minty ](https://www.math.ubc.ca/~israel/m340/kleemin3.pdf) problem.
+The following is a simple example solved by `linprog_simplex`:
 
 ```python
->>> c = [100, 10, 1]
->>> A_ub = [[1, 0, 0],
-...         [20, 1, 0],
-...         [200, 20, 1]]
->>> b_ub = [1, 100, 10000]
+>>> c = [4, 3]
+>>> A_ub = [[1, 1],
+...         [1, 2],
+...         [2, 1]]
+>>> b_ub = [10, 16, 16]
 >>> c, A_ub, b_ub = map(np.asarray, [c, A_ub, b_ub])
 >>> res = qe.optimize.linprog_simplex(c, A_ub=A_ub, b_ub=b_ub)
 >>> res.x, res.fun, res.success
-(array([    0.,     0., 10000.]), 10000.0, True)
+(array([6., 4.]), 36.0, True)
+>>> res.lambd  # Dual solution
+array([2., 0., 1.])
 ```
 
 ### Scalar Maximization
