@@ -8,8 +8,6 @@ authors:
     affiliation: 5
   - name: Chase Coleman
     affiliation: 4
-  - name: Oyamad Diasuke
-    affiliation: 2
   - name: Yuya Furusawa
     affiliation: 6
   - name: Shu Hu
@@ -20,6 +18,8 @@ authors:
     affiliation: 4
   - name: Matthew McKay
     affiliation: 1
+  - name: Daisuke Oyama
+    affiliation: 2
   - name: Thomas J. Sargent
     affiliation: 4
   - name: Zejin Shi
@@ -37,7 +37,7 @@ authors:
 affiliations:
   - name: The Australian National University
     index: 1
-  - name: The University of Tokyo
+  - name: University of Tokyo
     index: 2
   - name: Indian Institute of Technology (BHU), Varanasi
     index: 3
