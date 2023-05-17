@@ -227,7 +227,7 @@ This module contains a class `MarkovChain` which represents finite-state discret
 
 The `MarkovChain` object provides access to useful information such as:
 
-- Wheterh it is irreducible:
+- Whether it is irreducible:
   ```python
   >>> mc.is_irreducible
   True
