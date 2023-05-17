@@ -418,24 +418,24 @@ in the interval $(-1, 2)$.
 results(root=0.40829350427935973, function_calls=12, iterations=11, converged=True)
 ```
 
-## Miscellaneous tools
+## Miscellaneous Tools
 
-The library also contains some other tools that help in tackling problems
-like linear quadratic optimal control, analyzing dynamic linear economies,
-discrete lyapunov equation, etc. The brief overview of some of these routines
-is given below:
+The library also contains some other tools that help in solving problems
+such as linear quadratic optimal control and discrete Lyapunov equations,
+analyzing dynamic linear economies, etc.
+A brief overview of some of these routines is given below:
 
-### Matrix equations
+### Matrix Equations
 
-The function `solve_discrete_lyapunov` helps to compute the solution of
-the discrete lyapunov equation given by:
+The function `solve_discrete_lyapunov` computes the solution of
+the discrete Lyapunov equation given by:
 
 $$
-AXA' - X + B = 0
+AXA' - X + B = 0.
 $$
 
 ```python
->>> A = np.ones((2, 2)) * .5
+>>> A = np.full((2, 2), .5)
 >>> B = np.array([[.5, -.5], [-.5, .5]])
 >>> qe.solve_discrete_lyapunov(A, B)
 array([[ 0.5, -0.5],
@@ -446,20 +446,20 @@ Similarly, the function `solve_discrete_riccati` computes the solution of
 the discrete-time algebraic Riccati equation:
 
 $$
-X = A'XA - (N + B'XA)'(B'XB + R)^{-1}(N + B'XA) + Q
+X = A'XA - (N + B'XA)'(B'XB + R)^{-1}(N + B'XA) + Q.
 $$
 
 ### LQ Control
 
 The library has a class `LQ` for analyzing linear quadratic optimal
-control problems of either the infinite horizon form or the finite horizon form.
+control problems of either the infinite horizon form or the finite horizon form:
 
 ```python
 >>> Q = np.array([[0., 0.], [0., 1]])
 >>> R = np.array([[1., 0.], [0., 0]])
->>> RF = np.eye(2) * 100
->>> A = np.ones((2, 2)) * .95
->>> B = np.ones((2, 2)) * -1
+>>> RF = np.diag(np.full(2, 100))
+>>> A = np.full((2, 2), .95)
+>>> B = np.full((2, 2), -1.)
 >>> beta = .95
 >>> T = 1
 >>> lq_mat = qe.LQ(Q, R, A, B, beta=beta, T=T, Rf=RF)
@@ -475,39 +475,39 @@ Linear Quadratic control system
 ### Graph Tools
 
 The library contains a class `DiGraph` to represent directed graphs
-and provides information about the graph structure such as strong
-connectivity, speriodicity, cyclic components, etc.
+and provide information about the graph structure such as strong
+connectivity, periodicity, etc.
 
 ```python
->>> adj_matrix = [[1, 0, 1], [1, 0, 1], [1, 1, 1]]
->>> node_labels = np.array(['a', 'b', 'c'])
+>>> adj_matrix = [[0, 1, 0, 0, 0],
+...               [0, 0, 1, 0, 0],
+...               [0, 0, 0, 1, 0],
+...               [1, 0, 0, 0, 1],
+...               [0, 0, 0, 1, 0]]
+>>> node_labels = ['a', 'b', 'c', 'd', 'e']
 >>> g = qe.DiGraph(adj_matrix, node_labels=node_labels)
 >>> g
 Directed Graph:
-  - n(number of nodes): 3
+  - n(number of nodes): 5
 ```
 
-- Check if the graph is strongly connected
+- Check if the graph is strongly connected:
 
-```python
->>> g.is_strongly_connected
-True
-```
+  ```python
+  >>> g.is_strongly_connected
+  True
+  ```
 
-- Find the period of the graph
+- Inspect the periodicity of the graph:
 
-```python
->>> g.period
-1
-```
-
-- Find the cyclic components
-
-```python
->>> g.cyclic_components
-[array(['a', 'b', 'c'], dtype='<U1')]
-```
-
+  ```python
+  >>> g.is_aperiodic
+  False
+  >>> g.period
+  2
+  >>> g.cyclic_components
+  [array(['a', 'c', 'e'], dtype='<U1'), array(['b', 'd'], dtype='<U1')]
+  ```
 
 # Future Work
 
