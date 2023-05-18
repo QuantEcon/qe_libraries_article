@@ -327,38 +327,41 @@ To solve the model:
 Similary, we can also solve the model using *modified policy iteration*
 and *linear programming* by changing the `method` option in `ddp.solve`.
 
-## Optimize
+## Optimization
 
-The `optimize` module provides various routines to tackle the optimization problems.
+The `optimize` module provides various routines for solving optimization problems
+and root finding.
 The major benefit of these routines relative to other implementations in related
 libraries is JIT-acceleration with Numba.
 
-### Linear Programming Solver
+### Linear Programming
 
 This module contains a linear programming solver based on the simplex
-method - `linprog_simplex`, which helps to solve the following optimization problem.
+method, `linprog_simplex`, which solves a linear program of the following form:
 
 $$
 \begin{aligned}
-\min_{x} \ & c^T x \\
-\mbox{subject to } \ & A_{ub} x \leq b_{ub}, \\
-& A_{eq} x = b_{eq}, \\
-& l \leq x \leq u \\
+\max_{x} \ & c^T x \\
+\text{subject to } \ & A_{\mathrm{ub}} x \leq b_{\mathrm{ub}}, \\
+& A_{\mathrm{eq}} x = b_{\mathrm{eq}}, \\
+& x \geq 0. \\
 \end{aligned}
 $$
 
-The following snippet solves the [Klee-Minty ](https://www.math.ubc.ca/~israel/m340/kleemin3.pdf) problem.
+The following is a simple example solved by `linprog_simplex`:
 
 ```python
->>> c = [100, 10, 1]
->>> A_ub = [[1, 0, 0],
-...         [20, 1, 0],
-...         [200, 20, 1]]
->>> b_ub = [1, 100, 10000]
+>>> c = [4, 3]
+>>> A_ub = [[1, 1],
+...         [1, 2],
+...         [2, 1]]
+>>> b_ub = [10, 16, 16]
 >>> c, A_ub, b_ub = map(np.asarray, [c, A_ub, b_ub])
 >>> res = qe.optimize.linprog_simplex(c, A_ub=A_ub, b_ub=b_ub)
 >>> res.x, res.fun, res.success
-(array([    0.,     0., 10000.]), 10000.0, True)
+(array([6., 4.]), 36.0, True)
+>>> res.lambd  # Dual solution
+array([2., 0., 1.])
 ```
 
 ### Scalar Maximization
@@ -379,30 +382,30 @@ via Numba and hence can be embedded in larger functions that also use Numba.
 (array([0.99999814, 0.99999756]), -1.6936258239463265e-10, True)
 ```
 
-There's also the scalar maximization function - `brentq_max` which
-maximizes the function within the given bounded intervals and
-returns maximizer value, maximum value attained and some additional
-information related to convergence and number of iterations.
+There is also the scalar maximization function `brentq_max` which
+maximizes a function within a given bounded interval and
+returns a maximizer, the maximum value attained, and some additional
+information related to convergence and the number of iterations.
 
 ```python
 >>> @njit
 ... def f(x):
 ...     return -(x + 2.0)**2 + 1.0
 ...
->>> qe.optimize.brent_max(f, -3, 2) # x, max_value_of_f, extra_info
+>>> qe.optimize.brent_max(f, -3, 2)  # x, max_value_of_f, extra_info
 (-2.0, 1.0, (0, 6))
 ```
 
 ### Root Finding
 
-This module comprises of all the routines that finds the root of the given
+This module also includes routines that find a root of a given
 function. Presently, `quantecon` has the following implementations:
 
-- bisect
-- brentq
-- newton
-- newton_halley
-- newton_secant
+- `bisect`
+- `brentq`
+- `newton`
+- `newton_halley`
+- `newton_secant`
 
 The following snippet uses `brentq` to find the root of the function $f$
 in the interval $(-1, 2)$.
