@@ -1,5 +1,5 @@
 ---
-title: 'QuantEcon'
+title: 'QuantEcon.py: A community based Python library for quantitative economics'
 tags:
   - Python
   - Economics
