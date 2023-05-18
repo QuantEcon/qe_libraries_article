@@ -8,8 +8,6 @@ authors:
     affiliation: 5
   - name: Chase Coleman
     affiliation: 4
-  - name: Oyamad Diasuke
-    affiliation: 2
   - name: Yuya Furusawa
     affiliation: 6
   - name: Shu Hu
@@ -20,6 +18,8 @@ authors:
     affiliation: 4
   - name: Matthew McKay
     affiliation: 1
+  - name: Daisuke Oyama
+    affiliation: 2
   - name: Thomas J. Sargent
     affiliation: 4
   - name: Zejin Shi
@@ -37,7 +37,7 @@ authors:
 affiliations:
   - name: The Australian National University
     index: 1
-  - name: The University of Tokyo
+  - name: University of Tokyo
     index: 2
   - name: Indian Institute of Technology (BHU), Varanasi
     index: 3
@@ -151,64 +151,77 @@ graphs, algorithm for solving linear quadratic control, etc.
 ## Game Theory
 
 The `game_theory` submodule provides efficient implementation of state-of-the-art
-algorithms for computing Nash equilibria of normal form games,
-the Lemke-Howson algorithm, the McLennan-Tourky algorithm and
-several learning/evolutionary dynamics algorithms, such as
-fictitious play (and its stochastic version),
-best response dynamics (and its stochastic version),
-local interaction dynamics, and logit response dynamics.
+algorithms for computing Nash equilibria of normal form games.
 
-It can also compute all mixed Nash equilibria of a 2-player (non-degenerate)
-normal form game by support enumeration and vertex enumeration respectively.
+The following snippet computes all mixed Nash equilibria of a 2-player (non-degenerate)
+normal form game by support enumeration and vertex enumeration:
 
 ```python
 >>> import quantecon as qe
 >>> import numpy as np
+>>> import pprint
 ```
-
-```python
->>> bimatrix = [[(1, 1), (-1, 0)],
-...             [(-1, 0), (1, 0)],
-...             [(0, 0), (0, 0)]]
->>> g = qe.game_theory.NormalFormGame(bimatrix)
->>> qe.game_theory.support_enumeration(g)
-[(array([1., 0., 0.]), array([1., 0.])), (array([0., 1., 0.]), array([0., 1.]))]
->>> qe.game_theory.vertex_enumeration(g)
-[(array([1., 0., 0.]), array([1., 0.]))]
-```
-
-The following snippet computes mixed Nash equilibria of a
-2-player normal form game by the Lemke-Howson algorithm.
 
 ```python
 >>> bimatrix = [[(3, 3), (3, 2)],
 ...             [(2, 2), (5, 6)],
 ...             [(0, 3), (6, 1)]]
 >>> g = qe.game_theory.NormalFormGame(bimatrix)
+>>> print(g)
+2-player NormalFormGame with payoff profile array:
+[[[3, 3],  [3, 2]],
+ [[2, 2],  [5, 6]],
+ [[0, 3],  [6, 1]]]
+>>> NEs = qe.game_theory.support_enumeration(g)
+>>> pprint.pprint(NEs)
+[(array([1., 0., 0.]), array([1., 0.])),
+ (array([0.8, 0.2, 0. ]), array([0.66666667, 0.33333333])),
+ (array([0.        , 0.33333333, 0.66666667]), array([0.33333333, 0.66666667]))]
+>>> NEs = qe.game_theory.vertex_enumeration(g)
+>>> pprint.pprint(NEs)
+[(array([1., 0., 0.]), array([1., 0.])),
+ (array([0.        , 0.33333333, 0.66666667]), array([0.33333333, 0.66666667])),
+ (array([0.8, 0.2, 0. ]), array([0.66666667, 0.33333333]))]
+```
+
+The Lemke-Howson algorithm is also implemented, which computes one Nash equilibrium
+of a 2-player normal form game:
+
+```python
+>>> qe.game_theory.lemke_howson(g)
+(array([1., 0., 0.]), array([1., 0.]))
 >>> qe.game_theory.lemke_howson(g, init_pivot=1)
 (array([0.        , 0.33333333, 0.66666667]), array([0.33333333, 0.66666667]))
 ```
 
-Similarly, it can also compute mixed Nash equilibria of an
-N-player normal form game by applying the imitation
-game algorithm by McLennan and Tourky to the best response correspondence.
+This routine `lemke_howson` scales up to games with several hundreds actions.
+
+For N-player games, the McLennan-Tourky algorithm computes one (approximate) Nash equilibrium:
 
 ```python
->>> N = 3
->>> v = 2
->>> payoff_array = np.empty((2,)*N)
->>> payoff_array[0, :] = 1
->>> payoff_array[1, :] = 0
->>> payoff_array[1].flat[0] = v
->>> g = qe.game_theory.NormalFormGame((qe.game_theory.Player(payoff_array), ) * N)
->>> res = qe.game_theory.mclennan_tourky(g, epsilon=1e-5)
->>> res[0]
-array([0.70710754, 0.29289246])
->>> res[1]
-array([0.70710754, 0.29289246])
->>> res[2]
-array([0.70710754, 0.29289246])
+>>> payoff_profiles = [(3, 0, 2),
+...                    (1, 0, 0),
+...                    (0, 2, 0),
+...                    (0, 1, 0),
+...                    (0, 1, 0),
+...                    (0, 3, 0),
+...                    (1, 0, 0),
+...                    (2, 0, 3)]
+>>> g = qe.game_theory.NormalFormGame(np.reshape(payoff_profiles, (2, 2, 2, 3)))
+>>> print(g)
+3-player NormalFormGame with payoff profile array:
+[[[[3, 0, 2],   [1, 0, 0]],
+  [[0, 2, 0],   [0, 1, 0]]],
+
+ [[[0, 1, 0],   [0, 3, 0]],
+  [[1, 0, 0],   [2, 0, 3]]]]
+>>> qe.game_theory.mclennan_tourky(g)
+(array([0.61866018, 0.38133982]), array([0.4797706, 0.5202294]), array([0.37987835, 0.62012165]))
 ```
+
+The `game_theory` submodule also contains implementation of several learning/evolutionary dynamics algorithms,
+such as fictitious play (and its stochastic version), best response dynamics (and its stochastic version),
+local interaction dynamics, and logit response dynamics.
 
 ## Markov Chains
 
