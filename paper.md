@@ -66,13 +66,13 @@ computationally challenging problems, involving large numbers of heterogeneous
 agents and complex nonlinear interactions.
 
 [QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is an open-source
-software library that helps to support this shift
+Python library that helps to support this shift
 towards more computational intensive research in the field of economics.  First
 released in 2014, [QuantEcon.py](https://github.com/quantecon/QuantEcon.py)
 has been under continuous development for around
 9 years. The library includes a wide range of functions for economic analysis,
 including numerical methods, data visualization, estimation, and dynamic
-programming. The library includes a number of fundamental algorithms used in
+programming, implementing a number of fundamental algorithms used in
 high performance computational economics. In this article we review the key
 features of the the library.
 
@@ -110,7 +110,7 @@ to modify.
 For installation and maintenance ease, QuantEcon maintainers restrict
 contributions to depend on libraries available in [Anaconda](https://www.anaconda.com/).
 
-The [documentation is available on readthedocs](https://quanteconpy.readthedocs.io/en/latest/)
+The documentation is available on [readthedocs](https://quanteconpy.readthedocs.io/en/latest/).
 
 # Status
 
