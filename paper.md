@@ -30,7 +30,7 @@ authors:
     affiliation: 8
   - name: Natasha Watkins
     affiliation: 1
-  - name: Humphrey Yang
+  - name: Ziyue Yang
     affiliation: 1
   - name: Hengcheng Zhang
     affiliation: 1
@@ -133,7 +133,7 @@ conda install -c conda-forge quantecon
 
 # Capabilities
 
-This section gives a basic introduction of `quantecon` and it's usage. The
+This section gives a basic introduction of `quantecon` and its usage. The
 `quantecon` python library consists of the following major modules:
 
 - Game Theory (`game_theory`)
@@ -281,7 +281,7 @@ $$
   y_t = \mu + \rho y_{t-1} + \epsilon_t,
 $$
 
-by Tauchen's method (`tauchen`) or Rouwenhorst's method (`rouwenhorst`):
+by Tauchen's method (`tauchen`) [@tauchen_finite_1986] or Rouwenhorst's method (`rouwenhorst`) [@rouwenhorst_method_1995]:
 
 ```python
 >>> tauchen_mc = qe.markov.tauchen(n=4, rho=0.5, sigma=0.5, mu=0., n_std=3)
@@ -343,8 +343,11 @@ and *linear programming* by changing the `method` option in `ddp.solve`.
 
 The `optimize` module provides various routines for solving optimization problems
 and root finding.
-The major benefit of these routines relative to other implementations in related
-libraries is JIT-acceleration with Numba.
+
+Although some methods such as `bisect` and `brentq` have been implemented in popular libraries such as SciPy, 
+the major benefit of the `quantecon` implementation relative to other implementations 
+is JIT-acceleration and hence they can be embedded in user-defined functions 
+that target the Numba JIT compiler.
 
 ### Linear Programming
 
@@ -379,8 +382,7 @@ array([2., 0., 1.])
 ### Scalar Maximization
 
 The `optimize` module implements the Nelder-Mead algorithm [@gao2012implementing; @lagarias1998convergence; @singer2004efficient] for maximizing a
-scalar-valued function with one or more variables. This function is JIT-compiled
-via Numba and hence can be embedded in larger functions that also use Numba.
+scalar-valued function with one or more variables. 
 
 ```python
 >>> from numba import njit
