@@ -134,7 +134,7 @@ conda install -c conda-forge quantecon
 # Capabilities
 
 This section gives a basic introduction of `quantecon` and its usage. The
-`quantecon` python library consists of the following major modules:
+`quantecon` python library consists of the following top level modules:
 
 - Game Theory (`game_theory`)
 - Markov Chains (`markov`)
