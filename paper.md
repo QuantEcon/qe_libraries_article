@@ -1,5 +1,5 @@
 ---
-title: 'QuantEcon'
+title: 'QuantEcon.py: A community based Python library for quantitative economics'
 tags:
   - Python
   - Economics
@@ -53,8 +53,6 @@ affiliations:
     index: 8
 date: 13 December 2023
 bibliography: paper.bib
-nocite: |
-  @*
 ---
 
 # Summary
@@ -99,8 +97,8 @@ structure through a top-down development process.
 
 
 In terms of software systems and architecture, [QuantEcon.py](https://github.com/quantecon/QuantEcon.py) is built on
-top of standard libraries such as [NumPy](https://numpy.org) and [SciPy](https://scipy.org), while also heavily leveraging
-[Numba](https://numba.pydata.org) for just-in-time (JIT) code acceleration, combined with automatic parallelization and
+top of standard libraries such as [NumPy](https://numpy.org) [@2020NumPy-Array] and [SciPy](https://scipy.org) [@virtanen2020scipy], while also heavily leveraging
+[Numba](https://numba.pydata.org) [@lam2015numba] for just-in-time (JIT) code acceleration, combined with automatic parallelization and
 caching when possible.  ([Numba](https://numba.pydata.org) is a just-in-time (JIT) compiler for Python first
 developed by Continuum Analytics that can generate optimized LLVM machine code at
 run-time.)  JIT-based acceleration is essential to QuantEcon's strategy of
@@ -184,7 +182,8 @@ normal form game by support enumeration and vertex enumeration:
  (array([0.8, 0.2, 0. ]), array([0.66666667, 0.33333333]))]
 ```
 
-The Lemke-Howson algorithm is also implemented, which computes one Nash equilibrium
+The Lemke-Howson algorithm [@lemke1964equilibrium; @codenotti2008] is also implemented,
+which computes one Nash equilibrium
 of a 2-player normal form game:
 
 ```python
@@ -196,7 +195,7 @@ of a 2-player normal form game:
 
 This routine `lemke_howson` scales up to games with several hundreds actions.
 
-For N-player games, the McLennan-Tourky algorithm computes one (approximate) Nash equilibrium:
+For N-player games, the McLennan-Tourky algorithm [@mclennan2005imitation] computes one (approximate) Nash equilibrium:
 
 ```python
 >>> payoff_profiles = [(3, 0, 2),
@@ -265,7 +264,7 @@ The `MarkovChain` object provides access to useful information such as:
   >>> mc.cyclic_classes
   [array([0, 2, 4]), array([1, 3])]
   ```
-  
+
 - Simulation of time series of station transitions:
   ```python
   >>> mc.simulate(10)
@@ -379,7 +378,7 @@ array([2., 0., 1.])
 
 ### Scalar Maximization
 
-The `optimize` module implements the Nelder-Mead algorithm for maximizing a
+The `optimize` module implements the Nelder-Mead algorithm [@gao2012implementing; @lagarias1998convergence; @singer2004efficient] for maximizing a
 scalar-valued function with one or more variables. This function is JIT-compiled
 via Numba and hence can be embedded in larger functions that also use Numba.
 
@@ -457,7 +456,7 @@ array([[ 0.5, -0.5],
 ```
 
 Similarly, the function `solve_discrete_riccati` computes the solution of
-the discrete-time algebraic Riccati equation:
+the discrete-time algebraic Riccati equation [@chiang2010structured]:
 
 $$
 X = A'XA - (N + B'XA)'(B'XB + R)^{-1}(N + B'XA) + Q.
