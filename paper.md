@@ -214,8 +214,11 @@ For N-player games, the McLennan-Tourky algorithm [@mclennan2005imitation] compu
 
  [[[0, 1, 0],   [0, 3, 0]],
   [[1, 0, 0],   [2, 0, 3]]]]
->>> qe.game_theory.mclennan_tourky(g)
-(array([0.61866018, 0.38133982]), array([0.4797706, 0.5202294]), array([0.37987835, 0.62012165]))
+>>> mct = qe.game_theory.mclennan_tourky(g)
+>>> pprint.pprint(mct)
+(array([0.61866018, 0.38133982]),
+ array([0.4797706, 0.5202294]),
+ array([0.37987835, 0.62012165]))
 ```
 
 The `game_theory` submodule also contains implementation of several learning/evolutionary dynamics algorithms,
@@ -344,9 +347,9 @@ and *linear programming* by changing the `method` option in `ddp.solve`.
 The `optimize` module provides various routines for solving optimization problems
 and root finding.
 
-Although some methods such as `bisect` and `brentq` have been implemented in popular libraries such as SciPy, 
-the major benefit of the `quantecon` implementation relative to other implementations 
-is JIT-acceleration and hence they can be embedded in user-defined functions 
+Although some methods such as `bisect` and `brentq` have been implemented in popular libraries such as SciPy,
+the major benefit of the `quantecon` implementation relative to other implementations
+is JIT-acceleration and hence they can be embedded in user-defined functions
 that target the Numba JIT compiler.
 
 ### Linear Programming
@@ -382,7 +385,7 @@ array([2., 0., 1.])
 ### Scalar Maximization
 
 The `optimize` module implements the Nelder-Mead algorithm [@gao2012implementing; @lagarias1998convergence; @singer2004efficient] for maximizing a
-scalar-valued function with one or more variables. 
+scalar-valued function with one or more variables.
 
 ```python
 >>> from numba import njit
